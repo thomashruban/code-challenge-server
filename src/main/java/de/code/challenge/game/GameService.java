@@ -28,7 +28,7 @@ public class GameService {
             return ResultEnum.TIE;
         }
 
-        if (playerPick > computerPick || (playerPick == 0 && computerPick == 2)) {
+        if (playerPick > computerPick && !(playerPick == 2 && computerPick == 0)) {
             return ResultEnum.WIN;
         }
 
