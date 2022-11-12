@@ -24,20 +24,20 @@ public class GameService {
     }
 
     private ResultEnum determineWinner(int playerPick, int computerPick) {
-        int resultAbs = Math.abs(computerPick - playerPick);
-        switch (resultAbs) {
-            case 0:
-                return ResultEnum.TIE;
-            case 1:
-                return ResultEnum.LOSS;
-            default:
-                return ResultEnum.WIN;
+        if (playerPick == computerPick) {
+            return ResultEnum.TIE;
         }
+
+        if (playerPick > computerPick || (playerPick == 0 && computerPick == 2)) {
+            return ResultEnum.WIN;
+        }
+
+        return ResultEnum.LOSS;
     }
 
     public int getRandomPick() {
         Random random = new Random();
-        return random.nextInt(2) + 1;
+        return random.nextInt(3);
     }
 
 }
