@@ -17,7 +17,7 @@ public class GameController {
 
     private final GameService gameService;
 
-    @GetMapping("api/v1/rockPaperScissors/game/round/play")
+    @GetMapping("api/v1/game/rock-paper-scissors/round/play")
     public ResponseEntity<RoundResultDto> getRandomPick(
             @RequestParam(name = "player-pick") int playerPick) {
         return ResponseEntity.ok(gameService.playRound(playerPick));

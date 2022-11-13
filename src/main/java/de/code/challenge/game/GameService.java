@@ -1,12 +1,10 @@
 package de.code.challenge.game;
 
-import de.code.challenge.game.model.RoundResultDto;
 import de.code.challenge.game.model.ResultEnum;
+import de.code.challenge.game.model.RoundResultDto;
 import de.code.challenge.game.util.GameUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor

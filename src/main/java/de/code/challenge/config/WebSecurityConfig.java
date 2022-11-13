@@ -21,7 +21,7 @@ public class WebSecurityConfig {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .mvcMatchers("/h2-console/**").permitAll()
+//                .mvcMatchers("/h2-console/**").permitAll()
                 .mvcMatchers("/api/v1/**").authenticated()
                 .anyRequest().denyAll()
                 .and()
