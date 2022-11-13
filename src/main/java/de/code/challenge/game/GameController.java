@@ -1,6 +1,6 @@
 package de.code.challenge.game;
 
-import de.code.challenge.game.model.GameRoundResultDto;
+import de.code.challenge.game.model.RoundResultDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ public class GameController {
     private final GameService gameService;
 
     @GetMapping("api/v1/rockPaperScissor/game/round/play")
-    public ResponseEntity<GameRoundResultDto> getRandomPick(
+    public ResponseEntity<RoundResultDto> getRandomPick(
             @RequestParam(name = "player-pick") int playerPick) {
         return ResponseEntity.ok(gameService.playRound(playerPick));
     }

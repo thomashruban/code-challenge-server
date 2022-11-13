@@ -1,7 +1,8 @@
 package de.code.challenge.game;
 
-import de.code.challenge.game.model.GameRoundResultDto;
+import de.code.challenge.game.model.RoundResultDto;
 import de.code.challenge.game.model.ResultEnum;
+import de.code.challenge.game.util.GameUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,14 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class GameService {
 
-    public GameRoundResultDto playRound(int playerPick) {
+    private final GameUtil gameUtil;
 
-        int computerPick = getRandomPick();
+    public RoundResultDto playRound(int playerPick) {
+
+        int computerPick = gameUtil.getRandomIntNumber(3);
         ResultEnum result = determineWinner(playerPick, computerPick);
 
-        GameRoundResultDto resultDto = new GameRoundResultDto();
+        RoundResultDto resultDto = new RoundResultDto();
         resultDto.setComputerPick(computerPick);
         resultDto.setRoundResult(result);
 
@@ -28,16 +31,10 @@ public class GameService {
             return ResultEnum.TIE;
         }
 
-        if (playerPick > computerPick && !(playerPick == 2 && computerPick == 0)) {
+        if ((playerPick - computerPick + 3) % 3 == 1) {
             return ResultEnum.WIN;
         }
 
         return ResultEnum.LOSS;
     }
-
-    public int getRandomPick() {
-        Random random = new Random();
-        return random.nextInt(3);
-    }
-
 }
