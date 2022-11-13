@@ -3,11 +3,9 @@ package de.code.challenge.game;
 import de.code.challenge.game.model.ResultEnum;
 import de.code.challenge.game.model.RoundResultDto;
 import de.code.challenge.game.util.GameUtil;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,6 +19,7 @@ class GameServiceTest {
 
     @Mock
     private GameUtil gameUtil;
+
 
     @InjectMocks
     GameService gameService;
@@ -53,5 +52,20 @@ class GameServiceTest {
 
         // assert
         assertEquals(ResultEnum.LOSS, resultDto.getRoundResult());
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,0", "1,1", "2,2"})
+    public void checkTie(int playerPick, int computerPick) {
+        // setup
+
+        // stubbing
+        when(gameUtil.getRandomIntNumber(anyInt())).thenReturn(computerPick);
+
+        // run
+        RoundResultDto resultDto = gameService.playRound(playerPick);
+
+        // assert
+        assertEquals(ResultEnum.TIE, resultDto.getRoundResult());
     }
 }
